@@ -21,9 +21,12 @@ Authentication:
 ```Bash
 go get -u gorm.io/gorm
 ```
-3.To add support for PostgreSQL to the project, you need to install the PostgreSQL driver using the following command:
+3.To install support for PostgreSQL to the project, you need to install the PostgreSQL driver using the following command:
 ```Bash
 go get -u gorm.io/driver/postgres
 ```
+4.To install the Gin framework to the project, you can use the following command:
+```Bash
+$ go get -u github.com/gin-gonic/gin
 
 ### Usage
