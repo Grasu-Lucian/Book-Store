@@ -1,19 +1,23 @@
 package main
 
 import (
+
 	"github.com/gin-gonic/gin"
 	"main/initializers"
 )
 
 func init() {
+	//Extracts the information from the  env file
 	initializers.LoadEnvVariables()
+	//Makes the connection to the database
+	initializers.ConnectToDB()
+
 }
 
 // This function initializes a Gin router with default middleware.
 // It defines a GET route on "/ping" that responds with a JSON message "pong".
 // Finally, it starts the server and listens on port 3000.
 func main() {
-
 	// Initialize a default Gin router
 	r := gin.Default()
 
