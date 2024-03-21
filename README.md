@@ -42,5 +42,8 @@ go get -u github.com/golang-jwt/jwt/v5
 ```bash
 go get github.com/joho/godotenv
 ```
-
+7. To install the compile daemon package use the following command:
+```bash
+go get github.com/githubnemo/CompileDaemon
+```
 ### Usage
