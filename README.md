@@ -13,6 +13,13 @@ Database:
 Authentication:
 
 ### Installation:
-Not implemented yet
+1. Clone the repository:
+```Bash
+ git clone https://github.com/username/project.git
+```
+2. To install the GORM package in your Go environment, use the following command:
+```Bash
+go get -u gorm.io/gorm
+```
 
 ### Usage
