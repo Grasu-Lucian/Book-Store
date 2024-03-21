@@ -28,5 +28,6 @@ go get -u gorm.io/driver/postgres
 4.To install the Gin framework to the project, you can use the following command:
 ```Bash
 $ go get -u github.com/gin-gonic/gin
+```
 
 ### Usage
