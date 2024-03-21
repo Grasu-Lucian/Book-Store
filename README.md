@@ -38,4 +38,9 @@ go get -u golang.org/x/crypto/bcrypt
 ```bash
 go get -u github.com/golang-jwt/jwt/v5
 ```
+7. To install the godotenv package use the following command:
+```bash
+go get github.com/joho/godotenv
+```
+
 ### Usage
