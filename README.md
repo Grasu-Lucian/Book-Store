@@ -29,5 +29,13 @@ go get -u gorm.io/driver/postgres
 ```Bash
 $ go get -u github.com/gin-gonic/gin
 ```
+5. To install the bcrypt package use the following command:
+```bash
+go get -u golang.org/x/crypto/bcrypt
+```
 
+6. To install the jwt package use the following command:
+```bash
+go get -u github.com/golang-jwt/jwt/v5
+```
 ### Usage
