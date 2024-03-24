@@ -2,9 +2,10 @@ package controllers
 
 import (
 	"BOOK-STORE/models"
-	"main/initializers"
 	"github.com/gin-gonic/gin"
 	"golang.org/x/crypto/bcrypt"
+	"main/initializers"
+	
 )
 
 func Signup(c *gin.Context) {
@@ -13,6 +14,15 @@ func Signup(c *gin.Context) {
 		Username string
 		Password string
 	}
+	// Query the database for a user with the given username
+	var userModel models.User
+	userExists := initializers.DB.Where("username = ?", body.Username).First(&userModel).RowsAffected > 0
+	// If the user exists, return an error message
+	if userExists {
+		c.JSON(400, gin.H{"error": "Username is already taken"})
+		return
+	}
+
 	//Bind the request body to the body struct
 	if c.Bind(&body) != nil {
 		c.JSON(400, gin.H{"error": "Invalid request body"})
@@ -38,5 +48,5 @@ func Signup(c *gin.Context) {
 	}
 
 	//respond with the user
-c.JSON(200, gin.H{"user": user})
+	c.JSON(200, gin.H{"user": user})
 }
