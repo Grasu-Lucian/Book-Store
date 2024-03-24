@@ -12,7 +12,8 @@ func init() {
 	initializers.LoadEnvVariables()
 	//Makes the connection to the database
 	initializers.ConnectToDB()
-
+	//Syncs the database
+	initializers.SyncDatabase()
 }
 
 // This function initializes a Gin router with default middleware.
@@ -24,7 +25,7 @@ func main() {
 
 	// Define a route for GET requests on "/ping"
 	r.POST("/register", controllers.Signup)
-
+	r.POST("/login", controllers.Login)
 	// Start the HTTP server and listen on port 3000
 	r.Run()
 }
