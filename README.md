@@ -8,10 +8,10 @@ Book Store RESTful API for managing books in a store with added user authenticat
 1. User Registration: Users can create a new account. The application checks if the username is unique before creating the account.
 
 
-### Technology Stack:
-Backend:Go, GORM, bcrypt, Gin
-Database:PostgreSQL,
-Authentication: JWT (JSON Web Tokens), OAuth
+### Technology Stack:  
+Backend:Go, GORM, bcrypt, Gin  
+Database:PostgreSQL,  
+Authentication: JWT (JSON Web Tokens), OAuth  
 
 ### Installation:
 1. Clone the repository:
