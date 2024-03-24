@@ -105,3 +105,6 @@ func Login(c *gin.Context) {
 	c.SetCookie("Authorization", tokenString, 3600*24*30, "", "", false, true)
 	c.JSON(200, gin.H{"token": tokenString})
 }
+func ValidateToken(c *gin.Context) {
+	c.JSON(200, gin.H{"message": "Token is valid"})
+}

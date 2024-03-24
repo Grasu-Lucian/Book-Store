@@ -1,9 +1,10 @@
 package main
 
 import (
-	"github.com/gin-gonic/gin"
 	"main/controllers"
 	"main/initializers"
+	"main/middleware"
+	"github.com/gin-gonic/gin"
 )
 
 // This function is called before the main function
@@ -26,6 +27,7 @@ func main() {
 	// Define a route for GET requests on "/ping"
 	r.POST("/register", controllers.Signup)
 	r.POST("/login", controllers.Login)
+	r.GET("/validate",middleware.RequireAuth  , controllers.ValidateToken)
 	// Start the HTTP server and listen on port 3000
 	r.Run()
 }
