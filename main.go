@@ -1,11 +1,13 @@
 package main
 
 import (
-
-	"github.com/gin-gonic/gin"
+	"main/controllers"
 	"main/initializers"
+	"main/middleware"
+	"github.com/gin-gonic/gin"
 )
 
+// This function is called before the main function
 func init() {
 	//Extracts the information from the  env file
 	initializers.LoadEnvVariables()
@@ -23,14 +25,9 @@ func main() {
 	r := gin.Default()
 
 	// Define a route for GET requests on "/ping"
-	r.GET("/ping", func(c *gin.Context) {
-
-		// Respond with JSON containing a message
-		c.JSON(200, gin.H{
-			"message": "pong",
-		})
-	})
-
+	r.POST("/register", controllers.Signup)
+	r.POST("/login", controllers.Login)
+	r.GET("/validate",middleware.RequireAuth  , controllers.ValidateToken)
 	// Start the HTTP server and listen on port 3000
 	r.Run()
 }
