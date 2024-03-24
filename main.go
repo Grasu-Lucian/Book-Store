@@ -11,7 +11,8 @@ func init() {
 	initializers.LoadEnvVariables()
 	//Makes the connection to the database
 	initializers.ConnectToDB()
-
+	//Syncs the database
+	initializers.SyncDatabase()
 }
 
 // This function initializes a Gin router with default middleware.
