@@ -28,6 +28,7 @@ func main() {
 	r.POST("/register", controllers.Signup)
 	r.POST("/login", controllers.Login)
 	r.GET("/validate",middleware.RequireAuth  , controllers.ValidateToken)
+	r.POST("/book", middleware.RequireAuth, controllers.BookPost)
 	// Start the HTTP server and listen on port 3000
 	r.Run()
 }

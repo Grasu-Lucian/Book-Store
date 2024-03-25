@@ -36,7 +36,7 @@ func Signup(c *gin.Context) {
 	}
 	//Hash the password
 	hash, err := bcrypt.GenerateFromPassword([]byte(body.Password), 10)
-
+	//Check for errors
 	if err != nil {
 		c.JSON(500, gin.H{"error": "Error hashing password"})
 		return
