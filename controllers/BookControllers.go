@@ -8,7 +8,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-// Book post
+// BookPost creates a new book
 func BookPost(c *gin.Context) {
 	//get title, author, published date, ISBN, and price from the request body
 	var body struct {
@@ -51,4 +51,20 @@ func BookPost(c *gin.Context) {
 	}
 	//respond with the book
 	c.JSON(200, gin.H{"book": book})
+}
+
+// Book get via id
+func BookGet(c *gin.Context) {
+	//from url params get the id
+	id := c.Param("id")
+	
+	// Query the database for a book with the given ID
+	var bookModel models.Book
+	initializers.DB.Where("ID = ?", id).First(&bookModel)
+	if bookModel.ID == 0 {
+		c.JSON(400, gin.H{"error": "Book not found"})
+		return
+	}
+	//respond with the book
+	c.JSON(200, gin.H{"book": bookModel})
 }
