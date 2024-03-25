@@ -22,14 +22,19 @@ func init() {
 func main() {
 	// Initialize a default Gin router
 	r := gin.Default()
-
+	// Register the user routes
 	r.POST("/register", controllers.Signup)
+	// Register the login route
 	r.POST("/login", controllers.Login)
-	r.GET("/validate", middleware.RequireAuth, controllers.ValidateToken)
+	// Post a book
 	r.POST("/book", middleware.RequireAuth, controllers.BookPost)
+	// Get a book
 	r.GET("/book/:id", controllers.BookGet)
+	// Get all books
 	r.GET("/books", controllers.BookGetAll)
+	// Update a book
 	r.PUT("/book/:id", middleware.RequireAuth, controllers.BookUpdate)
+	// Delete a book
 	r.DELETE("/book/:id", middleware.RequireAuth, controllers.BookDelete)
 	// Start the HTTP server and listen on port 3000
 	r.Run()
