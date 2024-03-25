@@ -68,3 +68,11 @@ func BookGet(c *gin.Context) {
 	//respond with the book
 	c.JSON(200, gin.H{"book": bookModel})
 }
+// Get all books
+func BookGetAll(c *gin.Context) {
+	// Query the database for all books
+	var books []models.Book
+	initializers.DB.Find(&books)
+	//respond with the books
+	c.JSON(200, gin.H{"books": books})
+}
