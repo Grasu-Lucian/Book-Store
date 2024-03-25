@@ -30,6 +30,7 @@ func main() {
 	r.POST("/book", middleware.RequireAuth, controllers.BookPost)
 	r.GET("/book/:id", controllers.BookGet)
 	r.GET("/books", controllers.BookGetAll)
+	r.PUT("/book/:id", middleware.RequireAuth, controllers.BookUpdate)
 	// Start the HTTP server and listen on port 3000
 	r.Run()
 }

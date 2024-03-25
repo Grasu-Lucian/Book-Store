@@ -57,7 +57,7 @@ func BookPost(c *gin.Context) {
 func BookGet(c *gin.Context) {
 	//from url params get the id
 	id := c.Param("id")
-	
+
 	// Query the database for a book with the given ID
 	var bookModel models.Book
 	initializers.DB.Where("ID = ?", id).First(&bookModel)
@@ -68,6 +68,7 @@ func BookGet(c *gin.Context) {
 	//respond with the book
 	c.JSON(200, gin.H{"book": bookModel})
 }
+
 // Get all books
 func BookGetAll(c *gin.Context) {
 	// Query the database for all books
@@ -75,4 +76,39 @@ func BookGetAll(c *gin.Context) {
 	initializers.DB.Find(&books)
 	//respond with the books
 	c.JSON(200, gin.H{"books": books})
+}
+
+// Update book
+func BookUpdate(c *gin.Context) {
+	//get title, author, published date, ISBN, and price from the request body
+	var body struct {
+		Title         string
+		Author        string
+		PublishedDate string
+		ISBN          string
+		Price         float64
+	}
+	//Bind the request body to the body struct
+	if c.Bind(&body) != nil {
+		c.JSON(400, gin.H{"error": "Invalid request body"})
+		return
+	}
+	//get id from the url params
+	id := c.Param("id")
+	//get title, author, published date, ISBN, and price from the request body
+	var bookModel models.Book
+	initializers.DB.Where("ID = ?", id).First(&bookModel)
+	if bookModel.ID == 0 {
+		c.JSON(400, gin.H{"error": "Book not found"})
+		return
+	}
+	//update the book with the title, author, published date, ISBN, and price
+	initializers.DB.Model(&bookModel).Updates(models.Book{Title: body.Title, Author: body.Author, PublishedDate: body.PublishedDate, ISBN: body.ISBN, Price: body.Price})
+	//Check for errors
+	if initializers.DB.Error != nil {
+		c.JSON(500, gin.H{"error": "Error updating book"})
+		return
+	}
+	//respond with the book
+	c.JSON(200, gin.H{"book": bookModel})
 }
