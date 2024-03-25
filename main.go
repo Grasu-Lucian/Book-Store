@@ -18,8 +18,7 @@ func init() {
 }
 
 // This function initializes a Gin router with default middleware.
-// It defines a GET route on "/ping" that responds with a JSON message "pong".
-// Finally, it starts the server and listens on port 3000.
+// It then defines the routes for the application.
 func main() {
 	// Initialize a default Gin router
 	r := gin.Default()
@@ -31,6 +30,7 @@ func main() {
 	r.GET("/book/:id", controllers.BookGet)
 	r.GET("/books", controllers.BookGetAll)
 	r.PUT("/book/:id", middleware.RequireAuth, controllers.BookUpdate)
+	r.DELETE("/book/:id", middleware.RequireAuth, controllers.BookDelete)
 	// Start the HTTP server and listen on port 3000
 	r.Run()
 }

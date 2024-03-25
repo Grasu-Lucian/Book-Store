@@ -112,3 +112,25 @@ func BookUpdate(c *gin.Context) {
 	//respond with the book
 	c.JSON(200, gin.H{"book": bookModel})
 }
+//Delete book
+func BookDelete(c *gin.Context) {
+
+	//get id from the url params
+	id := c.Param("id")
+	// Query the database for a book with the given ID
+	var bookModel models.Book
+	initializers.DB.Where("ID = ?", id).First(&bookModel)
+	if bookModel.ID == 0 {
+		c.JSON(400, gin.H{"error": "Book not found"})
+		return
+	}
+	//delete the book
+	initializers.DB.Delete(&bookModel)
+	//Check for errors
+	if initializers.DB.Error != nil {
+		c.JSON(500, gin.H{"error": "Error deleting book"})
+		return
+	}
+	//Book deleted successfully
+	c.JSON(200, gin.H{"message": "Book deleted successfully"})
+}
