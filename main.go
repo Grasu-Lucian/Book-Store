@@ -1,10 +1,10 @@
 package main
 
 import (
+	"github.com/gin-gonic/gin"
 	"main/controllers"
 	"main/initializers"
 	"main/middleware"
-	"github.com/gin-gonic/gin"
 )
 
 // This function is called before the main function
@@ -18,16 +18,24 @@ func init() {
 }
 
 // This function initializes a Gin router with default middleware.
-// It defines a GET route on "/ping" that responds with a JSON message "pong".
-// Finally, it starts the server and listens on port 3000.
+// It then defines the routes for the application.
 func main() {
 	// Initialize a default Gin router
 	r := gin.Default()
-
-	// Define a route for GET requests on "/ping"
+	// Register the user routes
 	r.POST("/register", controllers.Signup)
+	// Register the login route
 	r.POST("/login", controllers.Login)
-	r.GET("/validate",middleware.RequireAuth  , controllers.ValidateToken)
+	// Post a book
+	r.POST("/book", middleware.RequireAuth, controllers.BookPost)
+	// Get a book
+	r.GET("/book/:id", controllers.BookGet)
+	// Get all books
+	r.GET("/books", controllers.BookGetAll)
+	// Update a book
+	r.PUT("/book/:id", middleware.RequireAuth, controllers.BookUpdate)
+	// Delete a book
+	r.DELETE("/book/:id", middleware.RequireAuth, controllers.BookDelete)
 	// Start the HTTP server and listen on port 3000
 	r.Run()
 }

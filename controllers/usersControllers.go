@@ -36,7 +36,7 @@ func Signup(c *gin.Context) {
 	}
 	//Hash the password
 	hash, err := bcrypt.GenerateFromPassword([]byte(body.Password), 10)
-
+	//Check for errors
 	if err != nil {
 		c.JSON(500, gin.H{"error": "Error hashing password"})
 		return
@@ -105,6 +105,4 @@ func Login(c *gin.Context) {
 	c.SetCookie("Authorization", tokenString, 3600*24*30, "", "", false, true)
 	c.JSON(200, gin.H{"token": tokenString})
 }
-func ValidateToken(c *gin.Context) {
-	c.JSON(200, gin.H{"message": "Token is valid"})
-}
+
