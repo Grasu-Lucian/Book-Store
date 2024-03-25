@@ -5,7 +5,11 @@ Welcome to Project Book Store!
 Book Store RESTful API for managing books in a store with added user authentication.
 
 ### Key Features:
-1. User Registration: Users can create a new account. The application checks if the username is unique before creating the account.
+1.User Registration and Login: The /register and /login routes handle user registration and login respectively.
+
+2.Book Management: The /book and /books routes handle creating, retrieving, updating, and deleting books. The /:id in the /book/:id routes is a placeholder for the ID of a book.
+
+3.Authentication Middleware: The middleware.RequireAuth function is used as middleware for the routes that modify books. This function checks if the user is authenticated before the request reaches the controller..
 
 
 ### Technology Stack:  
@@ -48,3 +52,17 @@ go get github.com/joho/godotenv
 go get github.com/githubnemo/CompileDaemon
 ```
 ### Usage
+In order to start the project you must run 
+```bash
+go run main.go
+```
+ You have the following routes that you can use:
+ 
+- Register a new user: `curl -X POST -H "Content-Type: application/json" -d '{"user":"Damien", "password":"password"}' http://localhost:3000/register`
+- Login: `curl -X POST -H "Content-Type: application/json" -d '{"user":"Damien", "password":"password"}' http://localhost:3000/login`
+- Add a new book (requires authentication): `curl -X POST -H "Content-Type: application/json" -d '{"title":"Example Book", "author":"Example Author", "publishedDate":"2000-01-01", "isbn":"123-456-789", "price":9.99}' http://localhost:3000/book`
+- Get a book by ID: `curl http://localhost:3000/book/:id`
+- Get all books: `curl http://localhost:3000/books`
+- Update a book by ID (requires authentication): `curl -X PUT -H "Content-Type: application/json" -d '{"title":"Updated Book", "author":"Updated Author", "publishedDate":"2001-01-01", "isbn":"987-654-321", "price":19.99}' http://localhost:3000/book/:id`
+- Delete a book by ID (requires authentication): `curl -X DELETE http://localhost:3000/book/:id`
+
